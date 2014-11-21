@@ -92,3 +92,13 @@ func (m *file) Write(p []byte) (n int, err error) {
 
 	return len(p), nil
 }
+
+func (m *file) Truncate(size int64) error {
+	if size > int64(len(m.buf)) {
+		size = int64(len(m.buf))
+	}
+
+	m.buf = m.buf[:size-1]
+
+	return nil
+}
